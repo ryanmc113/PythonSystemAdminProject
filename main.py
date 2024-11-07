@@ -12,6 +12,8 @@ cur = conn.cursor()
 cur.execute(""" 
     select count(id) from employees;
 """)
+
+
 print(cur.fetchone())
 conn.commit()
 cur.close()
