@@ -8,13 +8,13 @@ conn = psycopg2.connect(host=os.getenv('HOST'), dbname="postgres", user="postgre
                         password=os.getenv('PASSWORD'))
 
 cur = conn.cursor()
+print("Please type the last name of the employee or employees you are looking for?: ")
+last_name = input()
 
-cur.execute(""" 
-    select count(id) from employees;
-""")
+cur.execute("CALL last_name_GET(%s);", (last_name))
 
-
-print(cur.fetchone())
+num = cur.fetchall()
+print(num)
 conn.commit()
 cur.close()
 conn.close()
